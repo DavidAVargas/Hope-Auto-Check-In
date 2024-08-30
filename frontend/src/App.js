@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Navbar from './Navbar/Navbar';
 import CheckInForm from './CheckIn/CheckInForm';
+import Footer from './Footer/Footer';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         {/* Add your app content here */}
         < CheckInForm />
       </header>
+      <Footer />
     </div>
   );
 }
