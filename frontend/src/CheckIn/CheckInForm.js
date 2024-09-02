@@ -2,65 +2,64 @@ import React, { useState } from 'react';
 import './CheckInForm.css';
 
 function CheckInForm() {
-  const [formData, setFormData] = useState({
-    hospital: '',
-    hospitalName: '',
-    pain: '',
-    painLevel: '',
-    medication: '',
-    medicationInfo: '',
-    depression: '',
-  });
+  const [language, setLanguage] = useState('en');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const toggleLanguage = () => {
+    setLanguage((prevLang) => (prevLang === 'en' ? 'es' : 'en'));
   };
 
-  const submitForm = () => {
-    alert('Form submitted successfully!');
+  const labels = {
+    en: {
+      title: "Hope Cancer Care of Nevada Auto Check-In",
+      createdBy: "Created by David Vargas, Medical Assistant",
+      hospital: "Have you been to the hospital recently?",
+      pain: "Are you feeling any pain today from a scale of 0 to 10?",
+      medication: "Any changes to medication or new allergies?",
+      depression: "Any signs of depression?",
+      yes: "Yes",
+      no: "No",
+      submit: "Submit",
+      toggle: "Español"
+    },
+    es: {
+      title: "Auto Check-In de Hope Cancer Care de Nevada",
+      createdBy: "Creado por David Vargas, Asistente Médico",
+      hospital: "¿Ha estado en el hospital recientemente?",
+      pain: "¿Siente algún dolor hoy en una escala del 0 al 10?",
+      medication: "¿Algún cambio en la medicación o nuevas alergias?",
+      depression: "¿Algún signo de depresión?",
+      yes: "Sí",
+      no: "No",
+      submit: "Enviar",
+      toggle: "English"
+    }
   };
+
+  const formLabels = labels[language];
 
   return (
     <div className="container">
-      <h1>Hope Cancer Care of Nevada Auto Check-In</h1>
-      <p>Created by David Vargas, Medical Assistant</p>
+      <h1>{formLabels.title}</h1>
+      <p>{formLabels.createdBy}</p>
+      <button onClick={toggleLanguage}>{formLabels.toggle}</button>
       <form id="checkInForm">
-        <label>Have you been to the hospital recently?</label><br />
-        <input type="radio" name="hospital" value="yes" onChange={handleChange} /> Yes
-        <input type="radio" name="hospital" value="no" onChange={handleChange} /> No<br />
-        {formData.hospital === 'yes' && (
-          <div>
-            <label>If yes, please specify the hospital:</label><br />
-            <input type="text" name="hospitalName" value={formData.hospitalName} onChange={handleChange} /><br />
-          </div>
-        )}
+        <label>{formLabels.hospital}</label><br />
+        <input type="radio" name="hospital" value="yes" /> {formLabels.yes}
+        <input type="radio" name="hospital" value="no" /> {formLabels.no}<br />
 
-        <label>Are you feeling any pain today from a scale of 0 to 10?</label><br />
-        <input type="radio" name="pain" value="yes" onChange={handleChange} /> Yes
-        <input type="radio" name="pain" value="no" onChange={handleChange} /> No<br />
-        {formData.pain === 'yes' && (
-          <div>
-            <label>If yes, please specify the pain level (0-10):</label><br />
-            <input type="number" name="painLevel" min="0" max="10" value={formData.painLevel} onChange={handleChange} /><br />
-          </div>
-        )}
+        <label>{formLabels.pain}</label><br />
+        <input type="radio" name="pain" value="yes" /> {formLabels.yes}
+        <input type="radio" name="pain" value="no" /> {formLabels.no}<br />
 
-        <label>Any changes to medication or new allergies?</label><br />
-        <input type="radio" name="medication" value="yes" onChange={handleChange} /> Yes
-        <input type="radio" name="medication" value="no" onChange={handleChange} /> No<br />
-        {formData.medication === 'yes' && (
-          <div>
-            <label>If yes, please provide details:</label><br />
-            <textarea name="medicationInfo" rows="4" cols="50" value={formData.medicationInfo} onChange={handleChange}></textarea><br />
-          </div>
-        )}
+        <label>{formLabels.medication}</label><br />
+        <input type="radio" name="medication" value="yes" /> {formLabels.yes}
+        <input type="radio" name="medication" value="no" /> {formLabels.no}<br />
 
-        <label>Any signs of depression?</label><br />
-        <input type="radio" name="depression" value="yes" onChange={handleChange} /> Yes
-        <input type="radio" name="depression" value="no" onChange={handleChange} /> No<br />
+        <label>{formLabels.depression}</label><br />
+        <input type="radio" name="depression" value="yes" /> {formLabels.yes}
+        <input type="radio" name="depression" value="no" /> {formLabels.no}<br />
       </form>
-      <button onClick={submitForm}>Submit</button>
+      <button>{formLabels.submit}</button>
     </div>
   );
 }
