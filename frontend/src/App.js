@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './Navbar/Navbar';
 import AdminLogin from './AdminLogin/AdminLogin';
-import CheckInForm from './CheckIn/CheckInForm';
+import CheckInForm from './CheckIn/CheckInForm.js';
 import Footer from './Footer/Footer';
 
 function App() {
