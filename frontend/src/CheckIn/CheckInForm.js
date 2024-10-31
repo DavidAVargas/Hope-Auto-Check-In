@@ -67,63 +67,63 @@ function CheckInForm() {
 
   return (
     <div className="container">
-    <h1>{formLabels.title}</h1>
-    <p>{formLabels.createdBy}</p>
-    <button className='es' onClick={toggleLanguage}>{formLabels.toggle}</button>
-    <form id="checkInForm" onSubmit={handleSubmit}>
-      <div className="name-dob-container">
-        <div className="form-group">
-          <label>{formLabels.lastName}</label><br />
-          <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} /><br />
+      <h1>{formLabels.title}</h1>
+      <p>{formLabels.createdBy}</p>
+      <button className='es' onClick={toggleLanguage}>{formLabels.toggle}</button>
+      <form id="checkInForm" onSubmit={handleSubmit}>
+        <div className="name-dob-container">
+          <div className="form-group">
+            <label>{formLabels.lastName}</label><br />
+            <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} /><br />
+          </div>
+          <div className="form-group">
+            <label>{formLabels.firstName}</label><br />
+            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} /><br />
+          </div>
+          <div className="form-group">
+            <label className={language === 'es' ? 'spanish-dob' : ''}>{formLabels.dob}</label><br />
+            <input type="date" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} /><br />
+          </div>
         </div>
-        <div className="form-group">
-          <label>{formLabels.firstName}</label><br />
-          <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} /><br />
-        </div>
-        <div className="form-group">
-          <label className={language === 'es' ? 'spanish-dob' : ''}>{formLabels.dob}</label><br />
-          <input type="date" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} /><br />
-        </div>
-      </div>
 
-      <label>{formLabels.hospital}</label><br />
-      <input type="radio" name="hospital" value="yes" onChange={(e) => setHospital(e.target.value)} /> {formLabels.yes}
-      <input type="radio" name="hospital" value="no" onChange={(e) => setHospital(e.target.value)} /> {formLabels.no}<br />
-      {hospital === 'yes' && (
-        <div>
-          <label>{formLabels.hospitalName}</label><br />
-          <input type="text" value={hospitalName} onChange={(e) => setHospitalName(e.target.value)} /><br />
-        </div>
-      )}
+        <label>{formLabels.hospital}</label><br />
+        <input type="radio" name="hospital" value="yes" onChange={(e) => setHospital(e.target.value)} /> {formLabels.yes}
+        <input type="radio" name="hospital" value="no" onChange={(e) => setHospital(e.target.value)} /> {formLabels.no}<br />
+        {hospital === 'yes' && (
+          <div>
+            <label>{formLabels.hospitalName}</label><br />
+            <input type="text" value={hospitalName} onChange={(e) => setHospitalName(e.target.value)} /><br />
+          </div>
+        )}
 
-      <label>{formLabels.pain}</label><br />
-      <input type="radio" name="pain" value="yes" onChange={(e) => setPain(e.target.value)} /> {formLabels.yes}
-      <input type="radio" name="pain" value="no" onChange={(e) => setPain(e.target.value)} /> {formLabels.no}<br />
-      {pain === 'yes' && (
-        <div>
-          <label>{formLabels.painLevel}</label><br />
-          <input type="number" min="0" max="10" value={painLevel} onChange={(e) => setPainLevel(e.target.value)} /><br />
-        </div>
-      )}
+        <label>{formLabels.pain}</label><br />
+        <input type="radio" name="pain" value="yes" onChange={(e) => setPain(e.target.value)} /> {formLabels.yes}
+        <input type="radio" name="pain" value="no" onChange={(e) => setPain(e.target.value)} /> {formLabels.no}<br />
+        {pain === 'yes' && (
+          <div>
+            <label>{formLabels.painLevel}</label><br />
+            <input type="number" min="0" max="10" value={painLevel} onChange={(e) => setPainLevel(e.target.value)} /><br />
+          </div>
+        )}
 
-      <label>{formLabels.medication}</label><br />
-      <input type="radio" name="medication" value="yes" onChange={(e) => setMedication(e.target.value)} /> {formLabels.yes}
-      <input type="radio" name="medication" value="no" onChange={(e) => setMedication(e.target.value)} /> {formLabels.no}<br />
-      {medication === 'yes' && (
-        <div>
-          <label>{formLabels.medicationInfo}</label><br />
-          <textarea value={medicationInfo} onChange={(e) => setMedicationInfo(e.target.value)} rows="4" cols="50"></textarea><br />
-        </div>
-      )}
+        <label>{formLabels.medication}</label><br />
+        <input type="radio" name="medication" value="yes" onChange={(e) => setMedication(e.target.value)} /> {formLabels.yes}
+        <input type="radio" name="medication" value="no" onChange={(e) => setMedication(e.target.value)} /> {formLabels.no}<br />
+        {medication === 'yes' && (
+          <div>
+            <label>{formLabels.medicationInfo}</label><br />
+            <textarea value={medicationInfo} onChange={(e) => setMedicationInfo(e.target.value)} rows="4" cols="50"></textarea><br />
+          </div>
+        )}
 
-      <label>{formLabels.depression}</label><br />
-      <input type="radio" name="depression" value="yes" onChange={(e) => setDepression(e.target.value)} /> {formLabels.yes}
-      <input type="radio" name="depression" value="no" onChange={(e) => setDepression(e.target.value)} /> {formLabels.no}<br />
+        <label>{formLabels.depression}</label><br />
+        <input type="radio" name="depression" value="yes" onChange={(e) => setDepression(e.target.value)} /> {formLabels.yes}
+        <input type="radio" name="depression" value="no" onChange={(e) => setDepression(e.target.value)} /> {formLabels.no}<br />
 
-      <button type="submit">{formLabels.submit}</button>
-    </form>
-  </div>
-);
+        <button type="submit">{formLabels.submit}</button>
+      </form>
+    </div>
+  );
 }
 
 export default CheckInForm;
