@@ -14,6 +14,31 @@ body {
   color: black; /* Text color black */
 }
 
+.name-dob-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.name-dob-container .form-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.name-dob-container .form-group label,
+.name-dob-container .form-group input {
+  display: block;
+  width: 100%;
+}
+
+.es {
+  margin-bottom: 30px;
+}
+
+.spanish-dob {
+  margin-bottom: -30px;
+}
+
 @media (max-width: 768px) {
   .container {
     width: 90%;
