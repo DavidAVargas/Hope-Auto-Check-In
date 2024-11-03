@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CheckInForm.css';
+import SubmitForm from '../SubmitForm/SubmitForm';
 
 function CheckInForm() {
   const [language, setLanguage] = useState('en');
@@ -14,6 +15,7 @@ function CheckInForm() {
   const [painLevel, setPainLevel] = useState('');
   const [medicationInfo, setMedicationInfo] = useState('');
   const [showPopup, setShowPopup] = useState(false);
+  const [formData, setFormData] = useState(null);
 
   const toggleLanguage = () => {
     setLanguage((prevLang) => (prevLang === 'en' ? 'es' : 'en'));
@@ -64,6 +66,19 @@ function CheckInForm() {
     e.preventDefault();
     // Show the pop-up message
     setShowPopup(true);
+    // Set form data
+    setFormData({
+      lastName,
+      firstName,
+      dateOfBirth,
+      hospital,
+      hospitalName,
+      pain,
+      painLevel,
+      medication,
+      medicationInfo,
+      depression
+    });
   };
 
   return (
@@ -128,11 +143,13 @@ function CheckInForm() {
         <div className="popup">
           <div className="popup-content">
             <h2>Thank you</h2>
-            <p>Dr. Mehdi will be right with you. Please be seated and be patient. A Medical Assistant will call you back its your turn.</p>
+            <p>Dr. Mehdi will be right with you. Please be seated and be patient. A Medical Assistant will call you back when it's your turn.</p>
             <button onClick={() => setShowPopup(false)}>Close</button>
           </div>
         </div>
       )}
+
+      {formData && <SubmitForm formData={formData} />}
     </div>
   );
 }
