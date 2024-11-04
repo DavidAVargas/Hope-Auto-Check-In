@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './CheckInForm.css';
-import SubmitForm from '../SubmitForm/SubmitForm';
 
 function CheckInForm() {
   const [language, setLanguage] = useState('en');
@@ -14,8 +14,8 @@ function CheckInForm() {
   const [hospitalName, setHospitalName] = useState('');
   const [painLevel, setPainLevel] = useState('');
   const [medicationInfo, setMedicationInfo] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
-  const [formData, setFormData] = useState(null);
+
+  const navigate = useNavigate();
 
   const toggleLanguage = () => {
     setLanguage((prevLang) => (prevLang === 'en' ? 'es' : 'en'));
@@ -64,20 +64,23 @@ function CheckInForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Show the pop-up message
-    setShowPopup(true);
-    // Set form data
-    setFormData({
-      lastName,
-      firstName,
-      dateOfBirth,
-      hospital,
-      hospitalName,
-      pain,
-      painLevel,
-      medication,
-      medicationInfo,
-      depression
+    // Navigate to /submit with form data
+    navigate('/submit', {
+      state: {
+        formData: {
+          lastName,
+          firstName,
+          dateOfBirth,
+          hospital,
+          hospitalName,
+          pain,
+          painLevel,
+          medication,
+          medicationInfo,
+          depression
+        },
+        formLabels
+      }
     });
   };
 
@@ -138,18 +141,6 @@ function CheckInForm() {
 
         <button type="submit">{formLabels.submit}</button>
       </form>
-
-      {showPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <h2>Thank you</h2>
-            <p>Dr. Mehdi will be right with you. Please be seated and be patient. A Medical Assistant will call you back when it's your turn.</p>
-            <button onClick={() => setShowPopup(false)}>Close</button>
-          </div>
-        </div>
-      )}
-
-      {formData && <SubmitForm formData={formData} />}
     </div>
   );
 }

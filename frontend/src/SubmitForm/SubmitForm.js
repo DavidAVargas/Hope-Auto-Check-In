@@ -1,7 +1,11 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './SubmitForm.css';
 
-function SubmitForm({ formData, formLabels }) {
+function SubmitForm() {
+  const location = useLocation();
+  const { formData, formLabels } = location.state || {};
+
   if (!formData) {
     return (
       <div className="submit-container">
