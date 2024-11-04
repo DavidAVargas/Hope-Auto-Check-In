@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './Navbar/Navbar';
 import AdminLogin from './AdminLogin/AdminLogin';
 import CheckInForm from './CheckIn/CheckInForm.js';
+import SubmitForm from './SubmitForm/SubmitForm';
 import Footer from './Footer/Footer';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             </header>
           } />
           <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/submit" element={<SubmitForm />} />
         </Routes>
         <Footer />
       </div>
