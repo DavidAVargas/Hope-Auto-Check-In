@@ -3,7 +3,7 @@ const { PrismaClient } = require("@prisma/client")
 const prisma = new PrismaClient()
 const { generateToken } = require("./auth")
 
-const resolver = {
+const resolvers = {
     Query: {
         users: async () => await prisma.user.findMany(),
         user: async (_, { id }) => await prisma.user.findUnique({ where: { id }})
@@ -44,6 +44,30 @@ const resolver = {
         },
 
         // ----- Login ------
+        loginUser: async (_, { userName, password }, { prisma }) => {
+      const user = await prisma.user.findUnique({ where: { userName } });
+      if (!user) {
+        throw new Error("Invalid email or password");
+      }
+
+      const validPassword = await bcrypt.compare(password, user.password_hash);
+      if (!validPassword) {
+        throw new Error("Invalid email or password");
+      }
+
+      const tokenPayload = {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+      };
+
+      const token = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+      return {
+        token,
+        user,
+      };
+    },
         loginUser: async (_, {userName, password}) => {
             const user = await prisma.user.findUnique({ where: { userName }})
             if (!user){
@@ -66,32 +90,4 @@ const resolver = {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports = resolvers

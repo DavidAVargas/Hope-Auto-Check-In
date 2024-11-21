@@ -1,8 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useCurrentUser } from '../context/CurrentUser';
 import './Navbar.css';
 
 function Navbar() {
+  const {currentUser, updateToken} = useCurrentUser()
+
+  const handleLogout = () => {
+    updateToken(null);
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">
@@ -11,7 +18,9 @@ function Navbar() {
         </Link>
       </div>
       <div className="navbar-links">
-        <a href="/admin" className="admin-login">Admin Login</a>
+        {!currentUser ? <a href="/admin" className="admin-login">Admin Login</a> : <button onClick={handleLogout}>
+          LOGOUT
+          </button>}
       </div>
     </nav>
   );

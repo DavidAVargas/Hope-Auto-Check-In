@@ -8,9 +8,11 @@ import SubmitForm from './SubmitForm/SubmitForm';
 import Footer from './Footer/Footer';
 import { AuthProvider } from './Auth/AuthContext';
 import ProtectedRoute from './Auth/ProtectedRoute';
+import { CurrentUserProvider } from "./context/CurrentUser"      
 
 function App() {
   return (
+    <CurrentUserProvider>
     <AuthProvider>
       <Router>
         <div className="App">
@@ -28,6 +30,7 @@ function App() {
         </div>
       </Router>
     </AuthProvider>
+    </CurrentUserProvider>
   );
 }
 
