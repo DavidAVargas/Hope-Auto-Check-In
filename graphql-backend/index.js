@@ -12,7 +12,21 @@ const typeDefs = readFileSync(
 // Import the resolvers
 const resolvers = require("./resolvers") // Import the resolvers
 
-const server = new ApolloServer({ typeDefs, resolvers });
+// Create the Apollo Server
+const server = new ApolloServer({ typeDefs, resolvers,
+  context: ({ req }) => {
+    const token = req.headers.authorization?.split(' ')[1]; // Assuming the token is in the Authorization header
+    if (token) {
+      try {
+        const user = verifyToken(token);
+        return { user };
+      } catch (error) {
+        console.error('Invalid token:', error);
+      }
+    }
+    return {};
+  },
+ })
 
 const port = process.env.PORT || 5001
 
